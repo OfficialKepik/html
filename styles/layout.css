@@ -1,0 +1,22 @@
+div {
+    width: 100%;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header {
+    background-color: bisque;
+    height: 10vh;
+}
+
+.section {
+    background-color: chartreuse;
+    height: 80vh;
+}
+
+.footer {
+    background-color: blueviolet;
+    height: 10vh;
+}
