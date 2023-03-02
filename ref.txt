@@ -1,0 +1,5 @@
+https://fontawesome.com/ <- Good icons
+https://cdnjs.com/libraries/font-awesome <- Href style add
+
+https://pdfcoffee.com/learn-tailwind-pdf-pdf-free.html <- TailWind
+ 
