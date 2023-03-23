@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Binary tree</title>
+    <link rel="stylesheet" type="text/css" href="w3.css">
+    <link rel="stylesheet" type="text/css" href="
+https://cdnjs.cloudflare.com/ajax/libs/tooltipster/4.2.8/css/tooltipster.bundle.css
+" />
+    <script src="
+https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js
+"></script>
+    <script type="text/javascript" src="
+https://cdnjs.cloudflare.com/ajax/libs/tooltipster/4.2.8/js/tooltipster.bundle.min.js
+"></script>
+</head>
+
+<body>
+    <div id="container" class="w3-container w3-card w3-margin w3-padding-16">
+        <svg width="500" height="500" viewBox="0 0 500 500" id="svg">
+        </svg>
+        <button class="w3-btn w3-blue" id="generate">Generate</button>
+        <button class="w3-btn w3-blue" id="clear">Clear</button>
+    </div>
+
+
+    <script>
+
+        var svg = document.getElementById('svg');
+        var xmlns = "http://www.w3.org/2000/svg";
+
+        class Shape {
+            constructor(x, y, color) {
+                this.x = x || 0;
+                this.y = y || 0;
+                this.color = color ? color : "grey";
+                this.type = null;
+            }
+
+            draw() { }
+            square() { }
+            click() { }
+        }
+
+        class Circle extends Shape {
+            constructor(x, y, r, color) {
+                super(x, y, color)
+                this.type = 'circle';
+                this.r = r;
+            }
+
+            draw() {
+                var circle = document.createElementNS(xmlns, 'circle');
+                circle.setAttribute("cx", this.x)
+                circle.setAttribute("cy", this.y);
+                circle.setAttribute("r", this.r);
+                circle.setAttribute("fill", this.color);
+                circle.setAttribute("onclick", "remove(event)");
+                circle.setAttribute("class", "tooltip");
+                circle.setAttribute("title", "<p style='color:#F85D00'>Круг</p><p>Радиус:" + this.r + "</p><p>Площадь:" +
+                    this.square().toFixed(1) + "</p>");
+                svg.appendChild(circle);
+            }
+            square() {
+                return Math.PI * this.r * this.r;
+            }
+        }
+
+        class Rect extends Shape {
+            constructor(x, y, w, h, color) {
+                super(x, y, color)
+                this.type = 'rect';
+                this.w = w;
+                this.h = h;
+            }
+
+            draw() {
+                var rect = document.createElementNS(xmlns, 'rect');
+                rect.setAttribute("x", this.x)
+                rect.setAttribute("y", this.y);
+                rect.setAttribute("width", this.w);
+                rect.setAttribute("height", this.h);
+                rect.setAttribute("fill", this.color);
+                rect.setAttribute("onclick", "remove(event)");
+                rect.setAttribute("class", "tooltip");
+                rect.setAttribute("title", "<p style='color:#F85D00'>Прямоугольник</p><p>Ширина:" + this.w +
+                    "</p><p>Высота:" + this.h + "</p><p>Площадь:" +
+                    this.square().toFixed(1) + "</p>");
+                svg.appendChild(rect);
+            }
+            square() {
+                return this.w * this.h;
+            }
+        }
+
+        function generate() {
+            var shape;
+            for (var i = 0; i < 10; i++) {
+                var rand = Math.round(Math.random());
+                switch (rand) {
+                    case 0: {
+                        shape = new Circle(
+                            Math.round(Math.random() * 400 + 50),
+                            Math.round(Math.random() * 400 + 50),
+                            Math.round(Math.random() * 10 + 20),
+                            "green");
+                        shape.draw();
+                        break;
+                    }
+                    case 1: {
+                        shape = new Rect(
+                            Math.round(Math.random() * 400 + 50),
+                            Math.round(Math.random() * 400 + 50),
+                            Math.round(Math.random() * 30 + 30),
+                            Math.round(Math.random() * 30 + 30), "red");
+                        shape.draw();
+                        break;
+                    }
+                }
+            }
+        }
+        function remove(event) {
+            //console.log
+            (event)
+            if (!event) event = window.event;
+            var shape =
+                event.target
+                || event.srcElement;
+            var parent = shape.parentNode;
+            parent.removeChild(shape);
+        }
+
+        let shape = new Rect(100, 100, 100, 200);
+        shape.draw();
+
+        //console.log(shape.y);
+        $('.tooltip').tooltipster({
+            theme: 'tooltipster-punk',
+            contentAsHTML: true
+        });
+
+        $("#generate").click(generate);
+
+    </script>
+
+</body>
+
+</html>

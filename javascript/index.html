@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+    <style>
+        .traffic {
+            width: 90px;
+            background-color: rgb(202, 206, 206);
+            padding: 10px;
+        }
+
+        .traffic > div {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin: 10px;
+            opacity: 0.3;
+        }
+
+        .red {
+            background-color: red;
+        }
+
+        .yellow {
+            background-color: yellow;
+        }
+
+        .green {
+            background-color: green;
+        }
+    </style>
+</head> 
+</head>
+<body>
+    <div class="traffic" id="traffic">
+        <div class="red" id="red" ></div>
+        <div class="yellow" id="yellow"></div>
+        <div class="green" id="green"></div>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+
+           
+        var state = 0;
+
+        setInterval(function () {
+            switch (state) {
+                case 0:
+                    state = 1;
+                    yellow = 1;
+                    $('#red').css({ 'opacity': 1 });
+                    $('#yellow').css({ 'opacity': 0.3 });
+                    break;
+                case 1:
+                    state = 2;
+                    $('#red').css({ 'opacity': 0.3 });
+                    $('#yellow').css({ 'opacity': 1 });
+                    break;
+                case 2:
+                    state = 3;
+                    $('#green').css({ 'opacity': 1 });
+                    $('#yellow').css({ 'opacity': 0.3 });
+                    break;
+                case 3:
+                    state = 0;
+                    $('#green').css({ 'opacity': 0.3 });
+                    $('#yellow').css({ 'opacity': 1 });
+                    break;
+            }
+
+        }, 1000);
+    });
+    </script> 
+</body>
+</html>
